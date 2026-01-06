@@ -1,0 +1,16 @@
+/* Um programa para imprimir um valor multiplicado. */
+
+int teste (int u, int v)
+{
+    return u * v;
+}
+
+void main(void)
+{
+    int x;
+    int y;
+    x = 20;
+    y = 5;
+    /*x = input();    y = input();*/
+    output(teste(x,y));
+}

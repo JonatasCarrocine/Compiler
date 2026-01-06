@@ -1,0 +1,15 @@
+/* Um programa para imprimir um valor. */
+
+int teste (int u)
+{
+    return u;
+}
+
+void main(void)
+{
+    int x;
+    x = 4;
+    /*x = input();    y = input();*/
+    /*x = input();*/
+    output(teste(x));
+}

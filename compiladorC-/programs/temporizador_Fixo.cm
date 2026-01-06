@@ -1,0 +1,15 @@
+/* Um programa para realizar uma contagem regressiva para 0*/
+
+int tempo(int a) {
+    if (a == 0) return 0;
+    else return tempo(a - 1);
+}
+
+void main(void) {
+    int x;
+    int valor;
+
+    x = 4;
+
+    valor = tempo(x);
+}

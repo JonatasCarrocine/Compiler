@@ -1,0 +1,15 @@
+/* Um programa para verificar se um determinado numero eh divisvel por 3 */
+
+int divide (int u)
+{
+    if (u - (u/3) * 3 == 0) return 1; /* u-u/v*v == u mod 3 */
+    else return 0;
+}
+
+void main(void)
+{
+    int x;
+    x = input();
+
+    output(divide(x));
+}

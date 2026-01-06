@@ -1,0 +1,21 @@
+/* Um programa para verificar quantos dias vai chegar a 0 uma qtd de produto especifico
+considerando que esse valor eh fixo*/
+
+int estoque (int q, int v, int d)
+{ 
+    if (q < v) return d;
+    else return estoque(q-v,v,d+1);
+}
+
+void main(void)
+{
+    int qtd;
+    int vende;
+    int dias;
+
+    qtd = input();
+    vende = input();
+    dias = 0;
+
+    output(estoque(qtd, vende, dias));
+}

@@ -1,0 +1,23 @@
+/* Fibonacci - (imprime a arvore sintatica e a tabela de simbolos)*/
+
+int Fibonacci( int x)
+{
+     int val;
+
+      if (x == 1) val = 1;
+      if (x == 2) val = 1;
+      if (x > 2) val = Fibonacci(x-2)+Fibonacci(x-1);
+      return val;
+}
+
+void main(void)
+{
+       int x;
+       int y;
+       int result;
+
+       x = input();
+       y = input();
+       result = Fibonacci(x*y);
+       output(result);
+}

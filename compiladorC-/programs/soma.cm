@@ -1,0 +1,18 @@
+/*Soma de dois valores digitados pelo usuario*/
+
+int add(int a, int b) {
+    return a + b;
+}
+
+void main(void) {
+    int x;
+    int y;
+    int result;
+
+    x = input();
+    y = input();
+
+    result = add(x, y);
+
+    output(result);
+}

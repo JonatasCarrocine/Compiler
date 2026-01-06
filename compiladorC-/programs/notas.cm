@@ -1,0 +1,30 @@
+/* Considerando um cenario hipotetico de um ano escolar com 4 bimestres, faz a media das notas
+Se media >= 6, retorna 2 (passou)
+Se 3 <= media < 6, retorna 1 (exame)
+Se media < 3 retorna 0 (reprovou)*/
+
+int media (int um, int dois, int tres, int quatro)
+{
+    int resultado;
+
+    resultado = (um + dois + tres + quatro)/4;
+
+    if (resultado >= 6) return 2;
+    else if (resultado >= 3) return 1;
+    else return 0;
+}
+
+void main(void)
+{
+    int notaum;
+    int notadois;
+    int notatres;
+    int notaquatro;
+    
+    notaum = input();
+    notadois = input();
+    notatres = input();
+    notaquatro = input();
+
+    output(media(notaum, notadois, notatres, notaquatro));
+}

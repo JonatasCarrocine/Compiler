@@ -1,0 +1,18 @@
+/*Codigo para obter a area de um quadrilatero*/
+
+int area(int lin, int outro)
+{
+    return lin * outro;
+}
+
+void main (void)
+{
+    int linha;
+    int outralinha;
+    int resultado;
+
+    linha = input();
+    outralinha = input();
+    output(area(linha,outralinha));
+
+}
