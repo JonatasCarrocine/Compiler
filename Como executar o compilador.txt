@@ -1,0 +1,12 @@
+Para executar o compilador, dentro do diretório de "compiladorC-", digitar o seguinte comando entre aspas:
+"sh compile.sh"
+
+Após a execução do script, será gerado o arquivo comp.exe para rodar os códigos no compilador.
+Depois, para executar o programa gcd.cm, digite o seguinte comando entre aspas:
+
+"./comp.exe tests/gcd.cm"
+
+Pois ele está dentro da pasta tests, para rodar outro código, só substituir o gcd.cm por outro de extensão .cm:
+
+./comp.exe tests/[arquivo]
+
