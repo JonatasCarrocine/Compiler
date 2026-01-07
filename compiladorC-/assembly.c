@@ -396,11 +396,6 @@ void createInstr (QuadList l){
                 if (strcmp(a1.contents.var.name, "main") == 0) {
                     instructionFormat4(jmp, -1, "end");
                 }
-                else {
-                    instructionFormat2(addi, $ra, $ra, -1, NULL);
-                    instructionFormat2(load, $jmp, $ra, 0, NULL);
-                    instructionFormat3(jr, $jmp, 0, NULL);
-                }
                 break;
 
             case opPARAM:
@@ -423,14 +418,11 @@ void createInstr (QuadList l){
                     instructionFormat4(nop, 0, NULL);
                 }
                 else {
-                    aux = getFunSize(a3.contents.var.scope);
-                    instructionFormat2(addi, $sp, $sp, aux, NULL);
                     instructionFormat3(ldi, $jmp, getAdjustedLineno(line + 4), NULL);
                     instructionFormat2(str, $jmp, $ra, 0, NULL);
                     instructionFormat2(addi, $ra, $ra, 1, NULL);
                     instructionFormat4(jmp, -1, a1.contents.var.name);
                     instructionFormat2(move, getReg(a3.contents.var.name), $ret, 0, NULL);
-                    instructionFormat2(addi, $sp, $sp, -aux, NULL);
                 }
                 nArg = a2.contents.val;
                 currentParam = 0;
@@ -443,7 +435,10 @@ void createInstr (QuadList l){
                 //printf("saiu do InserirVar \n");
                 FunList f = funcHeadList;
                 //printf("Instruct novo\n");
-                instructionFormat2(str, getArgReg(), $sp, getVarMemLoc(a1.contents.var.name, f->next->id), NULL);
+                // CORREÇÃO: Busca na função atual (a3.contents.var.name) ao invés de f->next->id
+                int varLoc = getVarMemLoc(a1.contents.var.name, a3.contents.var.name);
+                //printf("VarLoc para %s no escopo %s: %d\n", a1.contents.var.name, a3.contents.var.name, varLoc);
+                instructionFormat2(str, getArgReg(), $sp, varLoc, NULL);
                 currentArg ++;
                 break;
 
