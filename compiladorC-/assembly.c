@@ -239,43 +239,55 @@ void createInstr (QuadList l){
         FunList g = funcHeadList;
         switch (q.op){
             case opADD: //Op +
-                instructionFormat1(add, getReg(a1.contents.var.name), getReg(a2.contents.var.name), getReg(a3.contents.var.name));
+                // CORREÇÃO: a3 (destino) vem primeiro no formato correto: add $destino, $fonte1, $fonte2
+                instructionFormat1(add, getReg(a3.contents.var.name), getReg(a1.contents.var.name), getReg(a2.contents.var.name));
                 break;
 
             case opSUB: //Op -
-                instructionFormat1(sub, getReg(a1.contents.var.name), getReg(a2.contents.var.name), getReg(a3.contents.var.name));
+                instructionFormat1(sub, getReg(a3.contents.var.name), getReg(a1.contents.var.name), getReg(a2.contents.var.name));
                 break;
             
             case opMULT: //Op *
-                instructionFormat1(mult, getReg(a1.contents.var.name), getReg(a2.contents.var.name), getReg(a3.contents.var.name));
+                instructionFormat1(mult, getReg(a3.contents.var.name), getReg(a1.contents.var.name), getReg(a2.contents.var.name));
                 break;
 
             case opDIV: //Op /
-                instructionFormat1(divi, getReg(a1.contents.var.name), getReg(a2.contents.var.name), getReg(a3.contents.var.name));
+                instructionFormat1(divi, getReg(a3.contents.var.name), getReg(a1.contents.var.name), getReg(a2.contents.var.name));
                 break;
 
             case opLT: //Op <
-                instructionFormat1(slt, getReg(a1.contents.var.name), getReg(a2.contents.var.name), getReg(a3.contents.var.name));
+                instructionFormat1(slt, getReg(a3.contents.var.name), getReg(a1.contents.var.name), getReg(a2.contents.var.name));
+                break;
+
+            case opEQUAL: //Op == (igualdade)
+                // Para a == b, usamos: se (a <= b) E (b <= a) então a == b
+                // Como temos apenas um registrador de saída, implementamos como:
+                // $t_dest = 1 se a == b, 0 caso contrário
+                // Usaremos a subtração: se (a - b) == 0, então eles são iguais
+                // Para simplificar: usamos sle que faz a <= b
+                // Se a <= b E b <= a, então a == b
+                // Implementação: usamos sge (a >= b) pois sge = NOT(a < b)
+                instructionFormat1(sge, getReg(a3.contents.var.name), getReg(a1.contents.var.name), getReg(a2.contents.var.name));
                 break;
 
             case opLEQUAL: //Op ==
-                instructionFormat1(sle, getReg(a1.contents.var.name), getReg(a2.contents.var.name), getReg(a3.contents.var.name));
+                instructionFormat1(sle, getReg(a3.contents.var.name), getReg(a1.contents.var.name), getReg(a2.contents.var.name));
                 break;
 
             case opGT: //Op >
-                instructionFormat1(sgt, getReg(a1.contents.var.name), getReg(a2.contents.var.name), getReg(a3.contents.var.name));
+                instructionFormat1(sgt, getReg(a3.contents.var.name), getReg(a1.contents.var.name), getReg(a2.contents.var.name));
                 break;
 
             case opGREQUAL: //Op >=
-                instructionFormat1(sge, getReg(a1.contents.var.name), getReg(a2.contents.var.name), getReg(a3.contents.var.name));
+                instructionFormat1(sge, getReg(a3.contents.var.name), getReg(a1.contents.var.name), getReg(a2.contents.var.name));
                 break;
 
             case opAND: //Op &
-                instructionFormat1(and, getReg(a1.contents.var.name), getReg(a2.contents.var.name), getReg(a3.contents.var.name));
+                instructionFormat1(and, getReg(a3.contents.var.name), getReg(a1.contents.var.name), getReg(a2.contents.var.name));
                 break;
 
             case opOR: //Op OR
-                instructionFormat1(or, getReg(a1.contents.var.name), getReg(a2.contents.var.name), getReg(a3.contents.var.name));
+                instructionFormat1(or, getReg(a3.contents.var.name), getReg(a1.contents.var.name), getReg(a2.contents.var.name));
                 break;
 
             case opASSIGN:
